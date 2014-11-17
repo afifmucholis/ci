@@ -4,12 +4,27 @@ class Barang extends CI_Controller {
 
 	public function index()
 	{
-		$data['barang'] = array (array('1','bejo','tas kecil'),
-							array('2', 'beni', 'barang curian'));
+		$this->load->model('transaksi');
+		$data['barang'] = $this->transaksi->daftar();
 		$this->load->view('daftarBarang', $data);
 	}
 
 	public function tambah(){
-		$this->load->view('tambah');
+		if($this->input->post('submit')){
+			$data['nama_pengguna'] = $this->input->post('nama');
+			$data['no_hp'] = $this->input->post('no_hp');
+			$data['keterangan'] = $this->input->post('keterangan');
+			$data['no_loker'] = $this->input->post('no_loker');
+			$this->load->model('transaksi');
+			if($this->transaksi->simpan($data)){
+				$this->index();
+			}else{
+				echo "Iput data gagal";
+			}
+		}else{
+			$this->load->view('form_penitipan');
+		}
+
+		
 	}
 }
