@@ -17,7 +17,12 @@ class Barang extends CI_Controller {
 	}
 
 	public function tambah(){
-		if($this->input->post('submit')){
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('no_hp', 'No Hp','required|numeric');
+		$this->form_validation->set_rules('no_loker', 'No Loker', 'required|alpha_numeric');
+
+		//if($this->input->post('submit')){
+		if ($this->form_validation->run()) {
 			$data['nama_pengguna'] = $this->input->post('nama');
 			$data['no_hp'] = $this->input->post('no_hp');
 			$data['keterangan'] = $this->input->post('keterangan');
@@ -29,7 +34,9 @@ class Barang extends CI_Controller {
 				echo "Iput data gagal";
 			}
 		}else{
+			$this->load->view('header');
 			$this->load->view('form_penitipan');
+			$this->load->view('footer');
 		}
 
 		

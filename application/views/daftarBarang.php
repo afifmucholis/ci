@@ -1,5 +1,5 @@
 <p> jadi nanti semua yang ada hubungannnya dengan front end, berada di view, tidak ada aturan untuk memberinamanya</p>
-
+<?php echo anchor('barang/tambah', 'Tambah Penitip')?>
 <h2> daftar penitipan barang </h2>
 <?php if ($barang) { 
 echo anchor('logout','Logout');
